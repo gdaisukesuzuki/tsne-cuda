@@ -36,6 +36,7 @@ class StridedRange {
         }
     };
 
+
     typedef typename thrust::counting_iterator<DifferenceType> CountingIterator;
     typedef typename thrust::transform_iterator<StrideFunctor, CountingIterator> TransformIterator;
     typedef typename thrust::permutation_iterator<Iterator, TransformIterator> PermutationIterator;

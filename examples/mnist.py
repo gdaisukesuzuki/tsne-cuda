@@ -22,7 +22,7 @@ ax.scatter(
     x=tsne_results[:,0],
     y=tsne_results[:,1],
     c=y_train,
-    cmap=plt.cm.get_cmap('Paired'),
+    cmap=plt.get_cmap('Paired'),
     alpha=0.4,
     s=0.5)
 plt.show()

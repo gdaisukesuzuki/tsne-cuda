@@ -6,7 +6,7 @@ Conda binaries are available through conda-forge! To install tsne-cuda with cond
 
 ## Pip installation
 
-Pip binaries are available for Python >=3.6 and CUDA 10.1, 10.2, 11.0, 11.1, 11.2, 11.3, 11.8 and 12.2 and FAISS version 1.7.4 and Intel MKL 2018.
+Pip binaries are available for Python >=3.10 and CUDA 12.X and 13.0+ and FAISS version 1.7.4 and Intel MKL 2018.
 
 To install tsne-cuda with pip, run `pip3 install tsnecuda`. This installs tsnecuda with a CUDA version of 10.2. For this to work, you MUST have both FAISS version 1.6.5
 and intel MKL installed already on your machine - see installation instructions for FAISS: [here](https://github.com/facebookresearch/faiss/blob/v1.6.5/INSTALL.md).

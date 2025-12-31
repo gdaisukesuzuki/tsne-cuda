@@ -29,7 +29,7 @@ ADD_DEFINITIONS(-DVERSION_PATCH=${CMAKE_PROJECT_VERSION_PATCH})
 # CXX Configuration
 #-------------------------------------------------------------------------------
 set(OPT_FLAGS
-    -std=c++14
+    -std=c++17
     -fopenmp
     -mpopcnt
     -msse4
@@ -52,7 +52,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE TRUE)
 #-------------------------------------------------------------------------------
 find_package(CUDAToolkit REQUIRED)
 if(NOT DEFINED CMAKE_CUDA_STANDARD)
-    set(CMAKE_CUDA_STANDARD 14)
+    set(CMAKE_CUDA_STANDARD 17)
     set(CMAKE_CUDA_STANDARD_REQUIRED ON)
 endif()
 
@@ -77,8 +77,9 @@ elseif(CUDAToolkit_VERSION_MAJOR EQUAL "13")
         -gencode=arch=compute_89,code=sm_89
         -gencode=arch=compute_90,code=sm_90
         -gencode=arch=compute_100,code=sm_100
-        -gencode=arch=compute_101,code=sm_101
+        -gencode=arch=compute_110,code=sm_110
         -gencode=arch=compute_120,code=sm_120
+        -gencode=arch=compute_121,code=sm_121
     )
 else()
     set(CUDA_ARCH
@@ -113,7 +114,7 @@ set(CMAKE_CUDA_FLAGS "${NVCC_FLAGS_STR}")
 
 # OpenMP configuration
 #-------------------------------------------------------------------------------
-find_package(OpenMP REQUIRED)
+find_package(OpenMP REQUIRED C CXX)
 #-------------------------------------------------------------------------------
 
 # GTEST Configuration

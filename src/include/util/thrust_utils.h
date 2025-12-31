@@ -23,19 +23,22 @@ namespace util {
 template <typename Iterator>
 class StridedRange {
  public:
-    typedef typename thrust::iterator_difference<Iterator>::type DifferenceType;
-    struct StrideFunctor :
-        public thrust::unary_function<DifferenceType, DifferenceType> {
-        DifferenceType stride;
-        explicit StrideFunctor(DifferenceType stride)
-            : stride(stride) {}
+  using DifferenceType = typename thrust::iterator_difference<Iterator>::type;
 
-        __host__ __device__ DifferenceType operator()(
-                const DifferenceType & x) const {
-            return stride * x;
-        }
+    struct StrideFunctor {
+      using argument_type = DifferenceType;
+      using result_type   = DifferenceType;
+
+      DifferenceType stride;
+
+      __host__ __device__
+      explicit StrideFunctor(DifferenceType s) : stride(s) {}
+
+      __host__ __device__
+      DifferenceType operator()(const DifferenceType& x) const {
+        return stride * x;
+      }
     };
-
 
     typedef typename thrust::counting_iterator<DifferenceType> CountingIterator;
     typedef typename thrust::transform_iterator<StrideFunctor, CountingIterator> TransformIterator;

@@ -25,7 +25,7 @@ def ord_string(s):
 TsneConfig = namedtuple(
     'TsneConfig',
     ['result', 'points', 'dims', 'perplexity', 'learning_rate', 'early_exaggeration',
-     'magnitude_factor', 'num_neighbors', 'iterations', 'iterations_no_progress',
+     'magnitude_factor', 'batch_size', 'num_neighbors', 'iterations', 'iterations_no_progress',
      'force_magnify_iters', 'perplexity_search_epsilon', 'pre_exaggeration_momentum',
      'post_exaggeration_momentum', 'theta', 'epssq', 'min_gradient_norm', 'initialization_type',
      'preinit_data', 'dump_points', 'dump_file', 'dump_interval', 'use_interactive',
@@ -64,7 +64,8 @@ class TSNE(object):
                  dump_interval=1,
                  print_interval=10,
                  device=0,
-                 magnitude_factor=5):
+                 magnitude_factor=5,
+                 batch_size=0):
         """Initialization method for barnes hut T-SNE class.
         """
 
@@ -114,6 +115,7 @@ class TSNE(object):
         self.gpu_device = int(device)
         self.print_interval = int(print_interval)
         self.magnitude_factor = float(magnitude_factor)
+        self.batch_size = int(batch_size)
 
         # Point dumping
         self.dump_file = str(dump_file)
@@ -151,6 +153,7 @@ class TSNE(object):
             learning_rate=c_float,
             early_exaggeration=c_float,
             magnitude_factor=c_float,
+            batch_size=c_int,
             num_neighbors=c_int,
             iterations=c_int,
             iterations_no_progress=c_int,
@@ -228,6 +231,7 @@ class TSNE(object):
             learning_rate=c_float(self.learning_rate),
             early_exaggeration=c_float(self.early_exaggeration),
             magnitude_factor=c_float(self.magnitude_factor),
+            batch_size=c_int(self.batch_size),
             num_neighbors=c_int(self.num_neighbors),
             iterations=c_int(self.iterations),
             iterations_no_progress=c_int(self.iterations_no_progress),

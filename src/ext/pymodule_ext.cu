@@ -10,6 +10,7 @@ void pymodule_tsne(float *result,
                    float learning_rate,
                    float early_exaggeration,
                    float magnitude_factor,
+                   int batch_size,
                    int num_neighbors,
                    int iterations,
                    int iterations_no_progress,
@@ -50,6 +51,7 @@ void pymodule_tsne(float *result,
     opt.learning_rate = learning_rate;
     opt.early_exaggeration = early_exaggeration;
     opt.magnitude_factor = magnitude_factor;
+    opt.batch_size = batch_size;
     opt.num_neighbors = num_neighbors;
     opt.iterations = iterations;
     opt.iterations_no_progress = iterations_no_progress;

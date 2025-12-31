@@ -18,9 +18,7 @@ option(BUILD_PYTHON "Build python if ON" ON)
 # Build Number Generation
 #-------------------------------------------------------------------------------
 SET(BUILD_NUMBER 0)
-SET(VERSION_STRING "${CMAKE_PROJECT_VERSION_MAJOR}.${CMAKE_PROJECT_VERSION_MINOR}.${CMAKE_PROJECT_VERSION_PATCH}")
 ADD_DEFINITIONS(-DBUILD_NUMBER=${BUILD_NUMBER})
-ADD_DEFINITIONS(-DVERSION_STRING=${VERSION_STRING})
 # src/exe/main.cu cannot inserting a three-part number (e.g. 3.0.0) in one go without throwing up
 ADD_DEFINITIONS(-DVERSION_MAJOR=${CMAKE_PROJECT_VERSION_MAJOR})
 ADD_DEFINITIONS(-DVERSION_MINOR=${CMAKE_PROJECT_VERSION_MINOR})

@@ -107,8 +107,20 @@ void tsnecuda::util::KNearestNeighbors(tsnecuda::GpuOptions &gpu_opt,
 
         search_index->train(num_points, points);
         search_index->add(num_points, points);
-        search_index->search(num_points, points, num_near_neighbors, distances, indices);
-
+        if (base_options.batch_size == 0){
+            search_index->search(num_points, points, num_near_neighbors, distances, indices);
+        }
+        else{
+            // === Batched search to avoid out of memory on large datasets ===
+            int search_batch_size = base_options.batch_size;
+            for (int i = 0; i < num_points; i += search_batch_size) {
+                int current_batch = std::min(search_batch_size, num_points - i);
+                search_index->search(current_batch, points + i * num_dims,
+                                    num_near_neighbors,
+                                    distances + i * num_near_neighbors,
+                                    indices + i * num_near_neighbors);
+            }
+        }
         delete search_index;
         for (int i = 0; i < ngpus; i++)
         {

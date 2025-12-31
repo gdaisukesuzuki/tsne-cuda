@@ -16,6 +16,7 @@ extern "C"
                        float learning_rate,
                        float early_exaggeration,
                        float magnitude_factor,
+                       int batch_size,
                        int num_neighbors,
                        int iterations,
                        int iterations_no_progress,

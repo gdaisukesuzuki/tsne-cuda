@@ -66,6 +66,7 @@ namespace tsnecuda
         float learning_rate = 200.0f;
         float early_exaggeration = 12.0f;
         float magnitude_factor = 5.0f;
+        int batch_size = 0; // 0 indicates full batch
         int num_neighbors = 1023;
         int iterations = 1000;
         int iterations_no_progress = 1000;
@@ -107,7 +108,7 @@ namespace tsnecuda
         Options(float *return_data, float *points, int num_points, int num_dims) : return_data(return_data), points(points), num_points(num_points),
                                                                                    num_dims(num_dims) { this->random_seed = time(NULL); }
         Options(float *points, int num_points, int num_dims,
-                float perplexity, float learning_rate, float magnitude_factor, int num_neighbors,
+                float perplexity, float learning_rate, float magnitude_factor, int batch_size, int num_neighbors,
                 int iterations, int iterations_no_progress, int force_magnify_iters, float perplexity_search_epsilon, float pre_exaggeration_momentum, float post_exaggeration_momentum, float theta, float epssq, float min_gradient_norm,
                 TSNE_INIT initialization, float *preinit_data,
                 bool dump_points, int dump_interval,
@@ -119,6 +120,7 @@ namespace tsnecuda
                                                                                         perplexity(perplexity),
                                                                                         learning_rate(learning_rate),
                                                                                         magnitude_factor(magnitude_factor),
+                                                                                        batch_size(batch_size),
                                                                                         num_neighbors(num_neighbors),
                                                                                         iterations(iterations),
                                                                                         iterations_no_progress(iterations_no_progress),
